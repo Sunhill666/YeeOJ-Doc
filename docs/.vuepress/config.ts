@@ -10,6 +10,11 @@ export default defineUserConfig({
   description: 'YeeOnlineJudge 相关文档站点',
   dest: "/usr/workfolder/YeeOJ-Doc/dist",
   head: [['link', { rel: 'icon', href: '/images/Trans.png' }]],
+  extendsMarkdown: (md) => {
+    md.use(require('markdown-it-multimd-table'), {
+      rowspan: true
+    })
+  },
   theme: defaultTheme({
     navbar: [
       {

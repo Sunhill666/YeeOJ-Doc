@@ -15,5 +15,8 @@
     "@vuepress/plugin-shiki": "next",
     "vuepress": "next",
     "vuepress-plugin-copy-code2": "next"
+  },
+  "dependencies": {
+    "markdown-it-multimd-table": "^4.1.3"
   }
 }

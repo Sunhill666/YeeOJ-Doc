@@ -9,5 +9,5 @@ actions:
   - text: 接口文档
     link: /api-doc/README.md
     type: secondary
-footer: MIT Licensed | Copyright © 2022 - Created By Sunhill666
+footer: MIT Licensed | Copyright © 2022 - Created By Sunhill You
 ---
