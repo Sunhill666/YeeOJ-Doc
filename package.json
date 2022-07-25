@@ -1,0 +1,19 @@
+{
+  "name": "yeeoj-doc",
+  "version": "1.0.0",
+  "description": "YeeOnlineJudge Wiki",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "author": "Sunhill666",
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "next",
+    "@vuepress/plugin-container": "next",
+    "@vuepress/plugin-shiki": "next",
+    "vuepress": "next",
+    "vuepress-plugin-copy-code2": "next"
+  }
+}
