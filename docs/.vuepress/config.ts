@@ -32,6 +32,7 @@ export default defineUserConfig({
     logo: '/images/Trans.png',
     repo: 'Sunhill666/YeeOnlineJudge',
     docsRepo: 'https://github.com/Sunhill666/YeeOJ-Doc',
+    docsDir: 'docs',
     editLinkText: '在Github上编辑此页'
   }),
   plugins: [
