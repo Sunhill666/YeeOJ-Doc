@@ -14,6 +14,7 @@ export default defineUserConfig({
     md.use(require('markdown-it-multimd-table'), {
       rowspan: true
     })
+    .use(require('markdown-it-plantuml'))
   },
   theme: defaultTheme({
     navbar: [
@@ -35,6 +36,7 @@ export default defineUserConfig({
       }
     ],
     logo: '/images/Trans.png',
+    logoDark: '/images/White-Trans.png',
     repo: 'Sunhill666/YeeOnlineJudge',
     docsRepo: 'https://github.com/Sunhill666/YeeOJ-Doc',
     docsDir: 'docs',

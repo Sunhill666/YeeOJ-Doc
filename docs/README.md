@@ -1,7 +1,8 @@
 ---
 home: true
-title: YeeOnlineJudge Wiki
+title: 首页
 heroImage: /images/Trans.png
+heroImageDark: /images/White-Trans.png
 actions:
   - text: 部署指南
     link: /guide/README.md
