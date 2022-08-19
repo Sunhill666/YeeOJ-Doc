@@ -1,4 +1,14 @@
-# 部署
+# YeeOnlineJudge
+
+## 简介
+
+该仓库为YeeOnlineJudge的后端仓库，此项目基于Django，使用Django REST Framework实现前后端分离以及RESTful接口
+
+本项目在设计之初参考和借鉴了[QingdaoU/OnlineJudge](https://github.com/QingdaoU/OnlineJudge)，在此对前辈们表达深深敬意
+
+## 部署
+
+### 本地部署
 
 1. Clone项目到本地
 
@@ -49,14 +59,41 @@
    pip install -r requirements.txt
    ```
 
-   Windows不需要，直接使用pip安装依赖
+   Windows直接使用pip安装依赖
 
    ```shell
    pip install -r requirements.txt
    ```
 
-7. 启动服务
+7. 修改开发环境和生产环境
 
    ```shell
-   python manage.py runserver 127.0.0.1:8000
+   # 开发坏境
+   vim ./YeeOnlineJudge/dev_settings.py
+
+   # 生产环境
+   vim ./YeeOnlineJudge/prod_settings.py
+   ```
+
+8. 启动服务
+
+   ```shell
+   python manage.py makemigrations && python manage.py migrate
+   python manage.py inital_user
+   python manage.py runserver 0.0.0.0:8000
+   ```
+
+### Docker-compose 部署
+
+1. 下载解压
+
+   ```shell
+   wget https://github.com/Sunhill666/YeeOnlineJudge/releases/download/0.0.1-220818-alpha/0.0.1-220818-alpha.zip
+   unzip 0.0.1-220818-alpha.zip
+   ```
+
+2. 部署
+
+   ```shell
+   docker-compose up -d
    ```

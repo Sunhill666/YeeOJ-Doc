@@ -7,17 +7,22 @@
 ```shell
 # pip list
 
-Package             Version
-------------------- -------
-asgiref             3.5.2
-Django              3.2.14
-djangorestframework 3.13.1
-pip                 22.1.2
-psycopg2            2.9.3
-pytz                2022.1
-setuptools          62.6.0
-sqlparse            0.4.2
-wheel               0.37.1
+Package                       Version
+----------------------------- ---------
+asgiref                       3.5.2
+async-timeout                 4.0.2
+certifi                       2022.6.15
+charset-normalizer            2.1.0
+Deprecated                    1.2.13
+Django                        3.2.14
+django-redis                  5.2.0
+djangorestframework           3.13.1
+djangorestframework-simplejwt 5.2.0
+setuptools                    62.6.0
+sqlparse                      0.4.2
+urllib3                       1.26.11
+wheel                         0.37.1
+wrapt                         1.14.1
 ```
 
 ## 首次提交至2022 年 7 月 24 日的提交
@@ -286,3 +291,73 @@ class ProblemTagViewSet(viewsets.ModelViewSet):
 ### utils模块
 
 暂未做设计
+
+## 2022 年 7 月 24 日至 2022 年 8 月 18 日的提交
+
+> [差异比较](https://github.com/Sunhill666/YeeOnlineJudge/compare/8876958..8a40125)
+
+### 模型
+
+修改User模型继承为AbstractBaseUser，自定义UserManager，创建UserProfile模型，与User、Classes外键关联
+
+```python
+class Classes(models.Model):
+    ...
+
+
+class UserManager(BaseUserManager):
+    ...
+
+
+class User(AbstractBaseUser):
+    ...
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    classes = models.ForeignKey(Classes, on_delete=models.PROTECT, related_name="users")
+    ...
+```
+
+在创建TestCase模型，与Problem模型关联
+
+```python
+class TestCase(models.Model):
+    ...
+
+
+class Problem(models.Model):
+    test_case = models.ForeignKey(TestCase, on_delete=models.PROTECT)
+    ...
+```
+
+创建Submission模型与User和Problem模型关联
+
+```python
+class Submission(models.Model):
+    commit_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
+    ...
+```
+
+### 序列化
+
+此部分只需要注意写一个基础的序列化器，再根据不同的功能继承这个基础的序列化器，定义需要的字段即可
+
+### 视图
+
+这部分就是根据自己需要的功能写就好，能用ViewSets和Generic Views就尽量用这两个，不行就是APIView，多用CBV，少用FBV
+
+### 认证与授权
+
+认证使用Simple JWT做JWT认证，使用简单，[官方文档](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html)比我说得好，我就不废话了
+
+权限使用的是DRF自带的，封装的简单易用，同样[官方文档](https://www.django-rest-framework.org/api-guide/permissions/)讲的比我好
+
+### 分页和查询
+
+使用[SearchFilter](https://www.django-rest-framework.org/api-guide/filtering/#searchfilter)和[OrderingFilter](https://www.django-rest-framework.org/api-guide/filtering/#orderingfilter)实现查询以及排序，[分页](https://www.django-rest-framework.org/api-guide/pagination/)使用的DRF自带的功能，都是现成的东西，加上几个配置项就能用，确实好用
+
+### 判题机的封装
+
+使用judge0作为判题机，对接口进行封装，参考[judge0api](https://pypi.org/project/judge0api/)进行修改后适用到本项目中，使用Redis将客户端缓存到内存中随用随取
