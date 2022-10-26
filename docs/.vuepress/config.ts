@@ -28,13 +28,21 @@ export default defineUserConfig({
       },
       {
         text: '开发文档',
-        link: '/dd/',
+        link: '/develop-doc/',
       },
       {
         text: '需求文档',
-        link: '/prd/',
+        link: '/requirement-doc/',
       }
     ],
+    sidebar: {
+      '/guide/': [
+        {
+          text: '指南',
+          children: ['/guide/README.md', '/guide/getting-start.md'],
+        },
+      ],
+    },
     logo: '/images/Trans.png',
     logoDark: '/images/White-Trans.png',
     repo: 'Sunhill666/YeeOnlineJudge',
